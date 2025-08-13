@@ -93,7 +93,7 @@ Edit
 ------------
 4  | 5  | 6
 ------------
-7  | 8  | 9
+7 | 8  | 9
 
 X  | O  | X
 ------------
@@ -101,6 +101,11 @@ O  | X  |
 ------------
    |    | O
 GUI Mode Example:
+
+
+
+
+
 
 
 <img width="549" height="647" alt="Screenshot 2025-08-13 003423" src="https://github.com/user-attachments/assets/b27e84ce-c5b7-4550-8198-9c25e29d7944" />
