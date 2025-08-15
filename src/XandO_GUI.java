@@ -11,7 +11,7 @@ public class XandO_GUI  extends JFrame {
 
     public XandO_GUI() {
     	
-        setTitle("Tic Tac Toe");
+        setTitle("Xs and Os");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(420, 520);
         setLocationRelativeTo(null);
@@ -52,7 +52,7 @@ public class XandO_GUI  extends JFrame {
             gc.gridx = 0; gc.fill = GridBagConstraints.HORIZONTAL;
             gc.insets = new Insets(8, 16, 8, 16);
 
-            JLabel title = new JLabel("Tic Tac Toe", SwingConstants.CENTER);
+            JLabel title = new JLabel("Xs and Os", SwingConstants.CENTER);
             title.setFont(title.getFont().deriveFont(Font.BOLD, 28f));
 
             JButton vsAI = new JButton("Play vs AI");
