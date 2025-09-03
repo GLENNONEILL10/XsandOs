@@ -119,6 +119,9 @@ GUI Mode Example:
 <img width="530" height="630" alt="Screenshot 2025-08-13 003446" src="https://github.com/user-attachments/assets/86148a88-f57b-4f03-b28a-22c135ed51b0" />
 
 
+
+
+
 🚀 Future Improvements
 Advanced AI (Minimax algorithm with difficulty levels)
 
