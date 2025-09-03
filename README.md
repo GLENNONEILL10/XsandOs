@@ -128,5 +128,4 @@ Online multiplayer via sockets
 
 Custom board sizes (e.g., 4x4, 5x5)
 
-📜 License
-This project is licensed under the MIT License – feel free to use and modify it for learning purposes.
+– feel free to use and modify it for learning purposes.
