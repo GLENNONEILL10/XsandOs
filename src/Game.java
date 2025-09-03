@@ -11,11 +11,13 @@ public class Game {
 	
 	Scanner input = new Scanner(System.in);
 	
+	//constructor that creates menu object
 	public Game() {
 		
 		menu = new Menu();
 	}
 	
+	//function for the game play
 	public void play() {
 		
 		
@@ -23,54 +25,71 @@ public class Game {
 		boolean gameOver = false;
 		
 
+		//while gameMenu is false
 		while(!gameMenu) {
 			
 			
 			boolean keepPlaying;
 			
+			//stores the user game type choice
 			int option = menu.gameTypeSelect();
 			
-		
+			//if the user selects 2 player
 			if(option == 1){
 				
 				
 				do {
 					
+						//creates new board object
 						Board board = new Board();
 						gameOver = false;
 						
+						//stores the chosen symbol
 						currentPlayerSymbol = menu.symbolChoice();
 						
+						//while gameOver is false
 						while(!gameOver){
 							
 							int numberChoice ;
 							
+							//prints the number grid
 							board.printNumberGrid();
 							
+							//space
 							System.out.println();
 							
+							//prints the game board
 							board.printBoard();
 							
+							//allows user the choose 1 - 9
 							numberChoice = input.nextInt();
 							
+							//if invalid choice
 							 if (numberChoice < 1 || numberChoice > 9) {
 								 
 							        System.out.println("Out of range. Enter 1-9.");
 							        continue;
 							    }
 							
+								//if the choice is available
 							if(board.isAvailable(numberChoice)) {
 								
+								//removes the number from the grid
 								board.removeNumber(numberChoice);
 								
+						//	== if number choice from 1 - 9 is valid it places the move onto board ==
 								switch(numberChoice){
 								
+									//if user selects 1
 									case 1:
 										
+									    //if move is valid
 										if(board.isValidMove(0, 0)) {
 											
+											//place the move
 											board.placeMove(0, 0, currentPlayerSymbol);
 										}
+										//if move isnt valid
 										else {
 											
 											System.out.println("Square is taken");
@@ -181,6 +200,7 @@ public class Game {
 										}
 										break;
 										
+									//if user selects invalid choice	
 									default:
 										
 										System.out.println("Error out of range 1-9");
@@ -194,30 +214,37 @@ public class Game {
 								
 							}
 							
+							//checks if the current player has won is true
 							if(board.checkWin(currentPlayerSymbol)){
 								
+								//prints the board
 								board.printBoard();
 								
 								System.out.println(currentPlayerSymbol +"- Congratulations You Have Won");
 								
+								//ends the game
 								gameOver = true;
 								
 								break;
 								
 							}
 							
+							//checks if board is full is true
 							if(board.isFull()){
 								
+								//prints board
 								board.printBoard();
 								
 								System.out.println("Draw");
 								
+								//ends the game
 								gameOver = true;
 								
 								break;
 								
 							}
 							
+							//swaps the current player
 							if(currentPlayerSymbol == 'X'){
 								
 								currentPlayerSymbol = 'O';
@@ -230,13 +257,15 @@ public class Game {
 							}
 											
 						}
-					
+						
+						//gives player the choice to play again
 						keepPlaying = menu.playAgain();
 						
-					
+					//loops while keep playing is true
 				} while(keepPlaying);
 				
 			}
+			//if the user chooses to play against ai
 			else if(option == 2) {
 				
 				boolean playFirst = false;
@@ -248,11 +277,13 @@ public class Game {
 					AI ai = new AI(board);
 					gameOver = false;
 					
+					//current player is set to the symbol 
 					currentPlayerSymbol = menu.symbolChoice();
 					
+					//asks user if they want to play first
 					playFirst = menu.playFirst();
 					
-					
+					//sets the ai player to the opposite of the real player
 					if(currentPlayerSymbol == 'X') {
 						
 						aiPlayer = 'O';
@@ -263,16 +294,17 @@ public class Game {
 					}
 					
 					
-					
+					//while game over is false
 					while(!gameOver) {
 						
-
+						//print number grid and game board
 						board.printNumberGrid();
 						
 						System.out.println();
 						
 						board.printBoard();
-									
+						
+						//if user choses to play first
 						if(playFirst == true) {
 							
 						
@@ -287,7 +319,7 @@ public class Game {
 							        continue;
 							    }
 							 
-							 
+							 //if number available is false
 							 if(!board.isAvailable(numberChoice)) {
 								 
 								 System.out.println("Please enter a number in the grid");
@@ -297,40 +329,43 @@ public class Game {
 											
 								}
 							 
+							//if the square chosen is false
 							 if (!board.placeByNumber(numberChoice, currentPlayerSymbol)) {
 								 	
 								 	System.out.println("Square is taken");
 								 
 								    continue; // retry if invalid move
 								}
-																		 
-							 if(board.checkWin(currentPlayerSymbol)){
-									
-									board.printBoard();
-									
-									System.out.println(currentPlayerSymbol +"- Congratulations You Have Won");
-									
-									gameOver = true;
-									
-									break;
-									
-								}
+										
+							//checks if real player has won	
+							if(board.checkWin(currentPlayerSymbol)){
 								
-								if(board.isFull()){
-									
-									board.printBoard();
-									
-									System.out.println("Draw");
-									
-									gameOver = true;
-									
-									break;
-									
-								}
+								board.printBoard();
 								
-							 
+								System.out.println(currentPlayerSymbol +"- Congratulations You Have Won");
+								
+								gameOver = true;
+								
+								break;
+								
+							}
+							//checks if the board is full
+							if(board.isFull()){
+								
+								board.printBoard();
+								
+								System.out.println("Draw");
+								
+								gameOver = true;
+								
+								break;
+								
+							}
+								
+							 //stores the move from the move list
 							 int aiMove = ai.getMove();
 							 
+							 //if there is no more moves in the list that means draw
 							 if(aiMove == -1){
 								 
 								 board.printBoard();
@@ -341,10 +376,10 @@ public class Game {
 								 break;
 								 
 							 }
+							 //places the ai move based on the numbers left in the grid
+							board.placeByNumber(aiMove, aiPlayer);
 							 
-							  board.placeByNumber(aiMove, aiPlayer);
-							 
-							 
+							 //checks if the ai has won
 							 if (board.checkWin(aiPlayer)) {
 								 
 					                board.printBoard();
@@ -355,20 +390,22 @@ public class Game {
 					                break;
 					            }
 							 
-					            if (board.isFull()) {
-					            	
-					                board.printBoard();
-					                
-					                System.out.println("Draw");
-					                
-					                gameOver = true;
-					                break;
-					            }
+							//checks if board is full	
+							if (board.isFull()) {
+								
+								board.printBoard();
+								
+								System.out.println("Draw");
+								
+								gameOver = true;
+								break;
+							}
 					            
 					           
 
 						}
 					
+						//if ai goes first
 						else {
 							
 							int aiMove = ai.getMove();
@@ -471,11 +508,13 @@ public class Game {
 				
 			}
 			
+			//asks player if they want to exit the game or go back to main menu
 			int choice;
 			System.out.println("[1]Do You want to quit completely\n[2]go back to main menu");
 			
 			choice = input.nextInt();
 			
+			//if the user choses to exit
 			if(choice == 1){
 				
 				System.exit(1);
@@ -484,6 +523,8 @@ public class Game {
 				
 				
 			}
+
+			//if they go back to main menu
 			else if(choice == 2) {
 				
 				
